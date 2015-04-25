@@ -2,9 +2,10 @@ module Typekitable
   class Commander < Thor
     include Thor::Actions
 
-    desc :test, "Is it working again?"
-    def test
-      say("Get everything running again after massive deletion :(")
+    desc "re-authenticate", "Reset your Typekit API token"
+    def re_authenticate
+      Authenticator.new.get_authentication
+      invoke :help
     end
   end
 end
