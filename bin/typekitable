@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
 require "typekitable"
 
+exit unless Typekitable::Tokenizer.has_token? || Typekitable::Authenticator.new.get_authentication
+
 Typekitable::Commander.start
