@@ -1,5 +1,3 @@
+require "thor"
 require "typekitable/version"
-
-module Typekitable
-  # Your code goes here...
-end
+require "typekitable/commander"

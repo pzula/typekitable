@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require "typekitable"
+
+Typekitable::Commander.start
