@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Typekitable
   describe Authenticator do
-    let(:subject) { described_class.new }
+    subject { described_class.new }
 
     context ".get_authentication" do
       xit "asks the user if they have an API token" do

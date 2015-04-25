@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Typekitable
   describe Commander do
-    let(:subject) { described_class }
+    subject { described_class }
     let(:authenticator) { double(:authenticator) }
 
     context ".re_authenticate" do
