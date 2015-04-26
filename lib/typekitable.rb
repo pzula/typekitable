@@ -1,5 +1,7 @@
 require "thor"
+require "net/http"
 require "typekitable/version"
 require "typekitable/commander"
 require "typekitable/tokenizer"
 require "typekitable/authenticator"
+require "typekitable/request"

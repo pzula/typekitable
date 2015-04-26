@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://typekit.com/api/v1/json/kits
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Typekit-Token:
+      - 5e4ce50b7c5b996b2fb5e65ee4a6b870b9bd3297
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 26 Apr 2015 03:32:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '62'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      X-Content-Type-Options:
+      - nosniff
+      X-Request-Id:
+      - 91ef73951039be5257ba39f1ea6cb2be
+      Remote-User:
+      - '25026'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"0070f6a6c33fddff5ec1d2ee68d3f426"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - tk_session_production=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTNiMzUxNTU1ODRmN2FiODczNzgyYWE3NmQ4ZGFiMWEwBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMU5RZEYxcm1Cb0dnODBaSzlsOVcrTXdlMlVwSDNkWDJPQ3BseEsveDFBY3M9BjsARg%3D%3D--1045504f3264a48862ceae4f7fd41a0295788a39;
+        domain=typekit.com; path=/; expires=Sun, 10-May-2015 03:32:55 GMT; HttpOnly
+      X-Runtime:
+      - '0.011173'
+      X-Rack-Cache:
+      - miss
+    body:
+      encoding: UTF-8
+      string: '{"kits":[{"id":"yuw0tqs","link":"/api/v1/json/kits/yuw0tqs"}]}'
+    http_version: 
+  recorded_at: Sun, 26 Apr 2015 03:32:55 GMT
+recorded_with: VCR 2.9.3
