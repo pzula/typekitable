@@ -19,6 +19,28 @@ module Typekitable
 
         expect{described_class.new(invalid_type)}.to raise_error(InvalidTypeError)
       end
+
+      it "raises an error if the options are invalid for the type" do
+        type = :kit_add
+        options = {:library => "Museo"}
+
+        expect{described_class.new(type, options)}.to raise_error(InvalidOptionsError)
+      end
+
+      it "does not raise an error if there are no options given" do
+        type = :kit_list
+
+        expect{described_class.new(type)}.to_not raise_error
+        expect(described_class.new(type).options).to eq({})
+      end
+
+      it "stores the options if the options are valid" do
+        type = :kit_add
+        options = {:name => "Web 2.0", :domains => "http://example.com"}
+
+        expect{described_class.new(type, options)}.to_not raise_error
+        expect(described_class.new(type, options).options).to eq(options)
+      end
     end
 
     context ".request_path" do
@@ -35,7 +57,7 @@ module Typekitable
 
     context ".response" do
       it "sends for the response" do
-        expect(Request).to receive(:new).with(path, verb).and_return(request)
+        expect(Request).to receive(:new).with(path, verb, {}).and_return(request)
         expect(request).to receive(:response).and_return(response)
 
         subject.response
