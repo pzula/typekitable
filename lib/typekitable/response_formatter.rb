@@ -1,4 +1,3 @@
-require 'pry'
 module Typekitable
   class ResponseFormatter
     attr_reader :response
