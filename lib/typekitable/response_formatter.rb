@@ -31,7 +31,7 @@ module Typekitable
       elsif singular_resource?
         singular_resource_headers
       else
-        [parsed_body.first]
+        [main_key]
       end
     end
 
@@ -43,7 +43,7 @@ module Typekitable
       elsif singular_resource?
         singular_resource_data
       else
-        empty_response_data
+        [parsed_body]
       end
     end
 
@@ -99,10 +99,6 @@ module Typekitable
 
     def singular_resource_data
       [data_element]
-    end
-
-    def empty_response_data
-      [{ main_key => "Nothing to show" }]
     end
 
     def error_key

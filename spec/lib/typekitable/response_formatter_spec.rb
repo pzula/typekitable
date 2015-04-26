@@ -30,6 +30,15 @@ module Typekitable
       )
     end
 
+    let(:short_response) do
+      double(
+        :response,
+        :code => "200",
+        :message => "OK",
+        :body => "{\"published\":\"2015-04-26T23:35:33Z\"}"
+      )
+    end
+
     let(:empty_response) do
       double(
         :response,
@@ -100,6 +109,12 @@ module Typekitable
         expect(singular_resource_subject.table_headers).to eq(expected_headers)
       end
 
+      it "formats the table header for a short message" do
+        expected_header = [:published]
+
+        expect(described_class.new(short_response).table_headers).to eq(expected_header)
+      end
+
       it "formats the table headers for an empty response" do
         response = described_class.new(empty_response)
         expected_headers = []
@@ -158,6 +173,12 @@ module Typekitable
         ]
 
         expect(singular_resource_subject.table_body).to eq(expected_body)
+      end
+
+      it "formats the table body for a short message" do
+        expected_body = [{:published => "2015-04-26T23:35:33Z"}]
+
+        expect(described_class.new(short_response).table_body).to eq(expected_body)
       end
 
       it "formats the table body when no data is received" do
