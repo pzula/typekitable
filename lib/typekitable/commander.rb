@@ -23,9 +23,16 @@ module Typekitable
       result.output_body
     end
 
+    desc "kit_info KIT_ID", "Get information on a specific kit"
+    def kit_info(kit_id)
+      result = formatted_response(response_for_command(:kit_info, {}, kit_id))
+      result.output_heading
+      result.output_body
+    end
+
     no_commands do
-      def response_for_command(command_type, options = {})
-        RequestFetcher.new(command_type, options).response
+      def response_for_command(command_type, options = {}, resource_id = nil)
+        RequestFetcher.new(command_type, options, resource_id).response
       end
 
       def formatted_response(response)

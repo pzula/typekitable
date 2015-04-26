@@ -1,9 +1,9 @@
 module Typekitable
   class RequestFetcher
-    attr_reader :type, :options
+    attr_reader :type, :options, :resource_id
 
 
-    VALID_TYPES = [:kit_list, :kit_add]
+    VALID_TYPES = [:kit_list, :kit_add, :kit_info]
     VALID_OPTIONS = {
       :kit_add => [:name, :domains]
     }
@@ -16,16 +16,21 @@ module Typekitable
       :kit_add => {
         :request_path => "kits",
         :verb => "POST"
+      },
+      :kit_info => {
+        :request_path => "kits",
+        :verb => "GET"
       }
     }
 
-    def initialize(type, options = {})
+    def initialize(type, options = {}, resource_id = nil)
       @type = validate_type(type)
       @options = validate_options(options)
+      @resource_id = resource_id
     end
 
     def request_path
-      REQUEST_CONFIG[type][:request_path]
+      REQUEST_CONFIG[type][:request_path].concat("/#{resource_id}").squeeze("/")
     end
 
     def verb
