@@ -10,5 +10,5 @@ Feature: As a user with a stored token, I can interact with the commands
      Then the output should contain "Commands"
 
   Scenario: I can get a list of my kits
-    Given I run `bundle exec ruby bin/typekitable kit list` interactively
+    Given I run `bundle exec ruby bin/typekitable kit_list` interactively
      Then the output should contain "Kits"
