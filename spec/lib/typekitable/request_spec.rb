@@ -27,17 +27,39 @@ module Typekitable
     end
 
     context ".response" do
-      it "returns the request response with access to the code, message, and body" do
-        VCR.use_cassette 'kits' do
-          @response = subject.response
-        end
+      context "successful response" do
+        it "returns the request response with access to the code, message, and body" do
+          VCR.use_cassette 'kits' do
+            allow(subject).to receive(:token).and_return(token)
+            @response = subject.response
+          end
 
-        expected_code = "200"
-        expected_message = "OK"
-        expected_body = "{\"kits\":[{\"id\":\"yuw0tqs\",\"link\":\"/api/v1/json/kits/yuw0tqs\"}]}"
-        expect(@response.body).to eq(expected_body)
-        expect(@response.code).to eq(expected_code)
-        expect(@response.message).to eq(expected_message)
+          expected_code = "200"
+          expected_message = "OK"
+          expected_body = "{\"kits\":[{\"id\":\"yuw0tqs\",\"link\":\"/api/v1/json/kits/yuw0tqs\"}]}"
+          expect(@response.body).to eq(expected_body)
+          expect(@response.code).to eq(expected_code)
+          expect(@response.message).to eq(expected_message)
+        end
+      end
+
+      context "unsuccessful response" do
+        let(:token) { "143250b7c5b996b2fb5e65ee4a6b870b9bd3297" }
+
+        it "returns the request response with access to the code, message, and body" do
+
+          VCR.use_cassette 'kits_error' do
+            allow(subject).to receive(:token).and_return(token)
+            @response = subject.response
+          end
+
+          expected_code = "401"
+          expected_message = "Unauthorized"
+          expected_body = "{\"errors\":[\"Not authorized\"]}"
+          expect(@response.body).to eq(expected_body)
+          expect(@response.code).to eq(expected_code)
+          expect(@response.message).to eq(expected_message)
+        end
       end
     end
   end
