@@ -1,3 +1,4 @@
+require 'pry'
 module Typekitable
   class ResponseFormatter
     attr_reader :response
@@ -23,26 +24,32 @@ module Typekitable
       JSON.parse(response.body, :symbolize_names => true)
     end
 
-    def data_heading
-      parsed_body.map {|key, _| key}.pop.to_s.capitalize
-    end
-
     def table_headers
-      return error_key if error?
-      parsed_body.map do |index, data|
-        data[0].keys.map do |key|
-          key
-        end
-      end.flatten
+      if error?
+        error_key
+      elsif collection?
+        collection_headers
+      elsif singular_resource?
+        singular_resource_headers
+      else
+        [parsed_body.first]
+      end
     end
 
     def table_body
-      return error_message if error?
-      parsed_body.map do |index, data|
-        data.map do |line|
-          line
-        end
-      end.flatten
+      if error?
+        error_message
+      elsif collection?
+        collection_data
+      elsif singular_resource?
+        singular_resource_data
+      else
+        empty_response_data
+      end
+    end
+
+    def data_heading
+      main_key.to_s.capitalize
     end
 
     def output_heading
@@ -55,12 +62,56 @@ module Typekitable
 
     private
 
+    def data_element
+      parsed_body[main_key]
+    end
+
+    def singular_resource?
+      !error? && data_element.is_a?(Hash)
+    end
+
+    def collection?
+      !error? && data_element.is_a?(Array)
+    end
+
+    def empty_response?
+      data_element.any?
+    end
+
+    def main_key
+      parsed_body.keys.first
+    end
+
+    def collection_headers
+      data_element.map do |data|
+        data.keys
+      end.flatten.uniq
+    end
+
+    def collection_data
+      data_element.map do |line|
+        line
+      end
+    end
+
+    def singular_resource_headers
+      data_element.keys
+    end
+
+    def singular_resource_data
+      [data_element]
+    end
+
+    def empty_response_data
+      [{ main_key => "Nothing to show" }]
+    end
+
     def error_key
       [response.code]
     end
 
     def error_message
-      [{response.code => ERRORS[response.code]}]
+      [{response.code => data_element.pop}]
     end
 
     def display_line(line)

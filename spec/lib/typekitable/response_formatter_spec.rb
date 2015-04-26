@@ -21,6 +21,24 @@ module Typekitable
       )
     end
 
+    let(:singular_resource_response) do
+      double(
+        :response,
+        :code => "200",
+        :message => "OK",
+        :body => "{\"kit\":{\"id\":\"fla3cfh\",\"name\":\"A new kit\",\"analytics\":false,\"domains\":[\"persazula.com\"],\"families\":[]}}"
+      )
+    end
+
+    let(:empty_response) do
+      double(
+        :response,
+        :code => "200",
+        :message => "OK",
+        :body => "{\"kits\":[{}]}"
+      )
+    end
+
     let(:error_response) do
       double(
         :response,
@@ -69,10 +87,24 @@ module Typekitable
     context ".table_headers" do
       subject { described_class.new(successful_response_with_long_body) }
 
-      it "formats the table headers as an array of symbols" do
+      it "formats the table headers for a collection" do
         expected_headers = [:id, :link, :name]
 
         expect(subject.table_headers).to eq(expected_headers)
+      end
+
+      it "formats the table headers for a singular resource" do
+        singular_resource_subject = described_class.new(singular_resource_response)
+        expected_headers = [:id, :name, :analytics, :domains, :families]
+
+        expect(singular_resource_subject.table_headers).to eq(expected_headers)
+      end
+
+      it "formats the table headers for an empty response" do
+        response = described_class.new(empty_response)
+        expected_headers = []
+
+        expect(response.table_headers).to eq(expected_headers)
       end
 
       it "formats the table header if an error response is detected" do
@@ -85,7 +117,7 @@ module Typekitable
     context ".table_body" do
       subject { described_class.new(successful_response_with_long_body) }
 
-      it "formats the table body to an array of hashes" do
+      it "formats the table body for a collection" do
         expected_body = [
           {
             :id => "trial",
@@ -110,6 +142,28 @@ module Typekitable
         error_subject = described_class.new(error_response)
 
         expect(error_subject.table_body).to eq([{"401"=>"Not authorized"}])
+      end
+
+      it "formats the table body for a singular resource" do
+        singular_resource_subject = described_class.new(singular_resource_response)
+
+        expected_body = [
+          {
+            :id => "fla3cfh",
+            :name => "A new kit",
+            :analytics => false,
+            :domains => ["persazula.com"],
+            :families => []
+          }
+        ]
+
+        expect(singular_resource_subject.table_body).to eq(expected_body)
+      end
+
+      it "formats the table body when no data is received" do
+        response = described_class.new(empty_response)
+
+        expect(response.table_body).to eq([{}])
       end
     end
 
