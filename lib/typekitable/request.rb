@@ -1,12 +1,13 @@
 module Typekitable
   class Request
-    attr_reader :path, :verb
+    attr_reader :path, :verb, :parameters
 
     BASE_URL = "https://typekit.com/api/v1/json/"
 
-    def initialize(path, verb)
+    def initialize(path, verb, parameters)
       @path = path
       @verb = verb
+      @parameters = parameters
     end
 
     def token
@@ -16,7 +17,7 @@ module Typekitable
     def response
       case verb
         when "GET" then get_request_response
-        when "POST" then post_request_reponse
+        when "POST" then post_request_response
       end
     end
 
@@ -43,9 +44,11 @@ module Typekitable
       end
     end
 
-    def post_request_reponse
-      http_request do |http, uri|
-        response = https.post(uri.path, headers)
+    def post_request_response
+      req = Net::HTTP::Post.new(uri.path, headers)
+      req.set_form_data(parameters)
+      http_request do |https, uri|
+        response = https.request(req)
         build_response(response.code, response.message, response.body)
       end
     end

@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://typekit.com/api/v1/json/kits
+    body:
+      encoding: US-ASCII
+      string: name=A+new+kit&domain=http%3A%2F%2Fpersazula.com
+    headers:
+      X-Typekit-Token:
+      - 5e4ce50b7c5b996b2fb5e65ee4a6b870b9bd3297
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      X-Rack-Cache:
+      - invalidate, pass
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Apr 2015 19:46:07 GMT
+      Status:
+      - 400 Bad Request
+      X-Request-Id:
+      - a9b7654e60fda8cdc2c88332b56d733b
+      X-Runtime:
+      - '0.018256'
+      X-Content-Type-Options:
+      - nosniff
+      Connection:
+      - close
+      Remote-User:
+      - '25026'
+      Set-Cookie:
+      - tk_session_production=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTFlYTU4MDViODM0Yjc2NGFhYTY1NTQ2NmJjMDg5NzUwBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMXVxZ05Rc2pJWEFuR0pGd0VOeUFjQ2JMd2hqTFhIbWpuajNVczhpN3VGU0k9BjsARg%3D%3D--011eea16061003f7745ecf13ef381ab95d24d09d;
+        domain=typekit.com; path=/; expires=Sun, 10-May-2015 19:46:07 GMT; HttpOnly
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '58'
+    body:
+      encoding: UTF-8
+      string: '{"errors":["You have reached the maximum number of kits"]}'
+    http_version: 
+  recorded_at: Sun, 26 Apr 2015 19:46:12 GMT
+recorded_with: VCR 2.9.3

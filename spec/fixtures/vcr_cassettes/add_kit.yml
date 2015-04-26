@@ -1,0 +1,63 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://typekit.com/api/v1/json/kits
+    body:
+      encoding: US-ASCII
+      string: name=A+new+kit&domains=http%3A%2F%2Fpersazula.com
+    headers:
+      X-Typekit-Token:
+      - 5e4ce50b7c5b996b2fb5e65ee4a6b870b9bd3297
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 26 Apr 2015 19:48:53 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '103'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      X-Content-Type-Options:
+      - nosniff
+      X-Request-Id:
+      - 7f5aa58e70d6f4d874b087594c2ce08d
+      Remote-User:
+      - '25026'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"58b5c03ed0999955324ac392713f4784"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - tk_session_production=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTQxYzY4ZWE1YzA3NzY1OTE0MGJiYmI5OTc2OWJiOWNhBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMTFuWi9PaWFXbjM5ODdwVUZKc1NGOFc5VW5TYlVWS3dvdlBZT3J5cnhRUDQ9BjsARg%3D%3D--e4b8f838f81631461265d7793598cce7ee687bb5;
+        domain=typekit.com; path=/; expires=Sun, 10-May-2015 19:48:53 GMT; HttpOnly
+      X-Runtime:
+      - '0.071526'
+      X-Rack-Cache:
+      - invalidate, pass
+    body:
+      encoding: UTF-8
+      string: '{"kit":{"id":"fla3cfh","name":"A new kit","analytics":false,"domains":["persazula.com"],"families":[]}}'
+    http_version: 
+  recorded_at: Sun, 26 Apr 2015 19:48:58 GMT
+recorded_with: VCR 2.9.3
