@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://typekit.com/api/v1/json/libraries
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Typekit-Token:
+      - 5e4ce50b7c5b996b2fb5e65ee4a6b870b9bd3297
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 26 Apr 2015 13:46:36 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '249'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      X-Content-Type-Options:
+      - nosniff
+      X-Request-Id:
+      - 3a9c6ab859e018835781ae79d2508c62
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"54f8212ec7e5d658d55ad0c9b337d0fb"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - tk_session_production=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTRhMmZjNGQyMDE1NGY0YThjZjBhYzI3NzM0NTdhNDIxBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVl2N2NKMDV3T2w0Umt3ckdHQjR0WFhBK1RrNFBkNGlONUx1Y3A2aFRKdms9BjsARg%3D%3D--8124d7eb51941a00e3f9ad6c1a1566ab9a36e6c9;
+        domain=typekit.com; path=/; expires=Sun, 10-May-2015 13:46:36 GMT; HttpOnly
+      X-Runtime:
+      - '0.007882'
+      X-Rack-Cache:
+      - miss
+    body:
+      encoding: UTF-8
+      string: '{"libraries":[{"id":"trial","link":"/api/v1/json/libraries/trial","name":"Trial
+        Library"},{"id":"personal","link":"/api/v1/json/libraries/personal","name":"Personal
+        Library"},{"id":"full","link":"/api/v1/json/libraries/full","name":"Full Library"}]}'
+    http_version: 
+  recorded_at: Sun, 26 Apr 2015 13:46:37 GMT
+recorded_with: VCR 2.9.3
