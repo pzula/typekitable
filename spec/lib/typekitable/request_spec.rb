@@ -27,13 +27,17 @@ module Typekitable
     end
 
     context ".response" do
-      it "returns the request response" do
+      it "returns the request response with access to the code, message, and body" do
         VCR.use_cassette 'kits' do
           @response = subject.response
         end
 
-        expected_response = "{\"kits\":[{\"id\":\"yuw0tqs\",\"link\":\"/api/v1/json/kits/yuw0tqs\"}]}"
-        expect(@response).to eq(expected_response)
+        expected_code = "200"
+        expected_message = "OK"
+        expected_body = "{\"kits\":[{\"id\":\"yuw0tqs\",\"link\":\"/api/v1/json/kits/yuw0tqs\"}]}"
+        expect(@response.body).to eq(expected_body)
+        expect(@response.code).to eq(expected_code)
+        expect(@response.message).to eq(expected_message)
       end
     end
   end

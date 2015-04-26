@@ -20,24 +20,6 @@ module Typekitable
       end
     end
 
-    def http_request
-      Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |https|
-        yield(https, uri)
-      end
-    end
-
-    def get_request_response
-      http_request do |https, uri|
-        https.get(uri.path, headers).body
-      end
-    end
-
-    def post_request_reponse
-      http_request do |http, uri|
-        https.post(uri.path, headers).body
-      end
-    end
-
     def uri
       URI.parse(BASE_URL + path)
     end
@@ -46,5 +28,36 @@ module Typekitable
       { "X-Typekit-Token" => token }
     end
 
+    private
+
+    def http_request
+      Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |https|
+        yield(https, uri)
+      end
+    end
+
+    def get_request_response
+      http_request do |https, uri|
+        response = https.get(uri.path, headers)
+        build_response(response.code, response.message, response.body)
+      end
+    end
+
+    def post_request_reponse
+      http_request do |http, uri|
+        response = https.post(uri.path, headers)
+        build_response(response.code, response.message, response.body)
+      end
+    end
+
+    def build_response(code, message, body)
+      Response.new(:code => code, :message => message, :body => body)
+    end
+  end
+
+  class Response < Struct.new(:code, :message, :body)
+    def initialize(from_hash)
+      super(*from_hash.values_at(*members))
+    end
   end
 end
