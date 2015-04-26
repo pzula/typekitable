@@ -15,10 +15,17 @@ module Typekitable
       result.output_body
     end
 
+    desc "kit_add NAME DOMAINS", "Adds a new kit"
+    def kit_add(name, domains)
+      response = response_for_command(:kit_add,  { :name => name, :domains => [domains] })
+      result = formatted_response(response)
+      result.output_heading
+      result.output_body
+    end
 
     no_commands do
-      def response_for_command(command_type)
-        RequestFetcher.new(command_type).response
+      def response_for_command(command_type, options = {})
+        RequestFetcher.new(command_type, options).response
       end
 
       def formatted_response(response)
