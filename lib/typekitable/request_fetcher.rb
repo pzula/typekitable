@@ -2,25 +2,9 @@ module Typekitable
   class RequestFetcher
     attr_reader :type, :options, :resource_id
 
-
-    VALID_TYPES = [:kit_list, :kit_add, :kit_info]
+    VALID_TYPES = [:kit_list, :kit_add, :kit_info, :kit_publish]
     VALID_OPTIONS = {
       :kit_add => [:name, :domains]
-    }
-
-    REQUEST_CONFIG = {
-      :kit_list => {
-        :request_path => "kits",
-        :verb => "GET"
-      },
-      :kit_add => {
-        :request_path => "kits",
-        :verb => "POST"
-      },
-      :kit_info => {
-        :request_path => "kits",
-        :verb => "GET"
-      }
     }
 
     def initialize(type, options = {}, resource_id = nil)
@@ -30,11 +14,11 @@ module Typekitable
     end
 
     def request_path
-      REQUEST_CONFIG[type][:request_path].concat("/#{resource_id}").squeeze("/")
+      request_config[type][:request_path]
     end
 
     def verb
-      REQUEST_CONFIG[type][:verb]
+      request_config[type][:verb]
     end
 
     def parameters
@@ -46,6 +30,27 @@ module Typekitable
     end
 
     private
+
+    def request_config
+      {
+        :kit_list => {
+          :request_path => "kits",
+          :verb => "GET"
+        },
+        :kit_add => {
+          :request_path => "kits",
+          :verb => "POST"
+        },
+        :kit_info => {
+          :request_path => "kits/#{resource_id}",
+          :verb => "GET"
+        },
+        :kit_publish => {
+          :request_path => "kits/#{resource_id}/publish",
+          :verb => "POST"
+        }
+      }
+    end
 
     def validate_type(type)
       raise InvalidTypeError unless VALID_TYPES.include?(type)

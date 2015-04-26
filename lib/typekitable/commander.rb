@@ -30,6 +30,13 @@ module Typekitable
       result.output_body
     end
 
+    desc "kit_publish KIT_ID", "Publish a draft kit"
+    def kit_publish(kit_id)
+      result = formatted_response(response_for_command(:kit_publish, {}, kit_id))
+      result.output_heading
+      result.output_body
+    end
+
     no_commands do
       def response_for_command(command_type, options = {}, resource_id = nil)
         RequestFetcher.new(command_type, options, resource_id).response

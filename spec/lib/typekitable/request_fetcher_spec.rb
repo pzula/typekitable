@@ -4,7 +4,7 @@ module Typekitable
   describe RequestFetcher do
     subject { described_class.new(:kit_list) }
     let(:type) { :kit_list }
-    let(:path) { "kits/" }
+    let(:path) { "kits" }
     let(:verb) { "GET" }
     let(:response) { double(:response) }
     let(:request) { double(:request, :response => response) }
