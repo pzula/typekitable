@@ -7,5 +7,24 @@ module Typekitable
       Authenticator.new.get_authentication
       invoke :help
     end
+
+    desc "kit_list", "Get a list of all of your kits"
+    def kit_list
+      result = formatted_response(response_for_command(:kit_list))
+      result.output_heading
+      result.output_body
+    end
+
+
+    no_commands do
+      def response_for_command(command_type)
+        RequestFetcher.new(command_type).response
+      end
+
+      def formatted_response(response)
+        ResponseFormatter.new(response)
+      end
+    end
+
   end
 end
