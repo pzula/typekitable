@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-require "typekitable/runner"
+require "typekitable"
 
 exit unless Typekitable::Tokenizer.has_token? || Typekitable::Authenticator.new.get_authentication
 
-Typekitable::Runner.new(ARGV.dup).execute!
+Typekitable::Commander.start
