@@ -1,4 +1,3 @@
-require 'pry'
 require "thor"
 require "net/http"
 require "formatador"
